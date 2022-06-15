@@ -7,14 +7,18 @@ def main():
     screen = pygame.display.set_mode((480, 480))
     pygame.display.set_caption("Snake")
 
-    snake = pygame.sprite.Group(BodyPiece("art/SnakeHead.png"))
+    snake = pygame.sprite.Group(BodyPiece("art/SnakeHead.png", (100, 100)))
 
     while True:
-        snake.draw(screen)
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_d:
+                    snake.add(BodyPiece("art/SnakeBody.png", (100, 130)))
 
+        snake.draw(screen)
         pygame.display.flip()
 
 

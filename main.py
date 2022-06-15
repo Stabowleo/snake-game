@@ -1,11 +1,22 @@
 import pygame
 from pygame.locals import *
+from sprites import *
 
 
-screen = pygame.display.set_mode((480, 480))
+def main():
+    screen = pygame.display.set_mode((480, 480))
+    pygame.display.set_caption("Snake")
+
+    snake = pygame.sprite.Group(BodyPiece("art/SnakeHead.png"))
+
+    while True:
+        snake.draw(screen)
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+
+        pygame.display.flip()
 
 
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 
-screen = pygame.display.set_mode((480, 320))
+screen = pygame.display.set_mode((480, 480))
 
 
 while True:

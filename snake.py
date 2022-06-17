@@ -97,6 +97,7 @@ def game_close():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                 if event.key == pygame.K_RETURN:
+                    score = 0
                     main()
 
 

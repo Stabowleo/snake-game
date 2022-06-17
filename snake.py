@@ -21,10 +21,16 @@ class Snake:
         self.head = [self.x, self.y]
         self.snake_list = [self.head]
         self.length = 1
+        self.colour = "black"
 
     def draw_snake(self):
+
+        random_colour = (random.randrange(100, 255), random.randrange(0, 255), random.randrange(0, 255))
+
+        chosen_colour = random_colour if snake.colour == "random" else green
+
         for x in self.snake_list:
-            pygame.draw.rect(screen, green, [x[0], x[1], self.size, self.size])
+            pygame.draw.rect(screen, chosen_colour, [x[0], x[1], self.size, self.size])
             
 
 
@@ -72,9 +78,11 @@ def main():
                 elif event.key == pygame.K_d:
                     snake.x_change = snake.size
                     snake.y_change = 0
+                elif event.key == pygame.K_RETURN:
+                    snake.colour = "random" if snake.colour == "black" else "black"
 
         if snake.x >= screen.get_width() or snake.x < 0 or snake.y >= screen.get_height() or snake.y < 0:
-            game_over = TraceRequestChunkSentParams
+            game_over = True
 
         snake.x += snake.x_change
         snake.y += snake.y_change

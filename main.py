@@ -41,9 +41,7 @@ def main():
         apple.draw(screen)
         snake.update(velocity, dt)
        
-        
-
-
+pass
 
 if __name__ == "__main__":
     main()

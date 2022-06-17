@@ -1,5 +1,6 @@
 import random
 import pygame
+import json
 from pygame.locals import *
 pygame.init()
 pygame.font.init()
@@ -54,16 +55,41 @@ pygame.display.set_icon(pygame.image.load("art/SnakeHead.png"))
 
 score = 0
 
+
+def load_scores():
+    with open("saves/topscores.json") as file:
+        data = json.load(file)
+        file.close()
+    return [i for i in data]
+
+
+def save_score(score):
+    
+    
+    scores = load_scores()
+    scores.append(score)
+
+    with open("saves/topscores.json", "w") as file:
+        json.dump(scores, file, indent=4)
+        file.close()
+
+
 def game_close():
+
+    save_score(score)
+    topscore = max(load_scores())
     scorefont = pygame.font.SysFont("comicsansms", 35)
     text = scorefont.render(f"Score: {score}", True, red)
+    highscore = scorefont.render(f"Highscore: {topscore}", True, red)
     text2 = scorefont.render(f"Exit - ESC, Restart - ENTER", True, red)
     gameover = pygame.image.load("art/GameOver.png")
     screen.fill((0, 0, 0))
+    screen.blit(gameover, (50, screen.get_height() - 600))
+    screen.blit(text, (50, screen.get_height() - 435))
+    screen.blit(highscore, (50, screen.get_height() - 370))
+    screen.blit(text2, (80, screen.get_height() - 60))
     while True: 
-        screen.blit(gameover, (50, screen.get_height() - 600))
-        screen.blit(text, (50, screen.get_height() - 435))
-        screen.blit(text2, (50, screen.get_height() - 370))
+        
         pygame.display.update()
 
         for event in pygame.event.get():
@@ -134,8 +160,6 @@ def main():
             score += 1
 
         clock.tick(snake.speed)
-
-
 
 
 if __name__ == "__main__":

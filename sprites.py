@@ -1,3 +1,4 @@
+from turtle import pos
 import pygame
 import random
 
@@ -12,6 +13,10 @@ class BodyPiece(pygame.sprite.Sprite):
         self.rect.center = position
 
 
+    def update(self, position, dt):
+        self.rect.move_ip(position[0], position[1])
+
+
 class Apple(pygame.sprite.Sprite):
 
     def __init__(self) -> None:
@@ -20,3 +25,4 @@ class Apple(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.center = [random.randrange(10, 470), random.randrange(10, 470)]
+

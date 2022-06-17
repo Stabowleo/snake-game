@@ -34,14 +34,23 @@ def main():
                 if event.key == pygame.K_w:
                     velocity = (0, -10)
 
+        for sprite in snake.sprites():
+
+            if pygame.sprite.collide_rect(sprite, apple.sprite):
+                apple.clear(screen, background)
+                apple.empty()
+                apple.add(Apple())
+                new_part_position = (sprite.update(True)[0] -30, sprite.update(True)[1])
+                snake.add(BodyPiece("art/SnakeBody.png", new_part_position))
    
+
         dt = fpsclock.tick(30)
         snake.clear(screen, background)
         snake.draw(screen)
         apple.draw(screen)
-        snake.update(velocity, dt)
-       
-pass
+        snake.update(False, velocity, dt)
+
+
 
 if __name__ == "__main__":
     main()

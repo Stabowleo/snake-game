@@ -40,7 +40,10 @@ def main():
                 apple.clear(screen, background)
                 apple.empty()
                 apple.add(Apple())
-                new_part_position = (sprite.update(True)[0] -30, sprite.update(True)[1])
+
+                last_part = snake.sprites()[len(snake.sprites()) -1]
+                new_part_position = (last_part.update(True)[0] - last_part.update(False, True)[0],
+                                     last_part.update(True)[1] - last_part.update(False, True)[1])
                 snake.add(BodyPiece("art/SnakeBody.png", new_part_position))
    
 
@@ -48,7 +51,7 @@ def main():
         snake.clear(screen, background)
         snake.draw(screen)
         apple.draw(screen)
-        snake.update(False, velocity, dt)
+        snake.update(False, False, velocity, dt)
 
 
 

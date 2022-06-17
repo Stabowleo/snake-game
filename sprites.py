@@ -12,11 +12,14 @@ class BodyPiece(pygame.sprite.Sprite):
         self.rect.center = position
 
 
-    def update(self, return_pos=False, position=None, dt=None):
-        if position and dt:
-            self.rect.move_ip(position[0], position[1])
+    def update(self, return_pos=False, return_velocity=None, velocity=None, dt=None):
+        if velocity and dt:
+            self.rect.move_ip(velocity[0], velocity[1])
+            self.velocity = velocity
         if return_pos:
             return self.rect.center
+        if return_velocity:
+            return self.velocity
 
 
 class Apple(pygame.sprite.Sprite):

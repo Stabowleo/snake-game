@@ -64,7 +64,7 @@ def load_scores():
 
 
 def save_score(score):
-    
+
     
     scores = load_scores()
     scores.append(score)
@@ -75,6 +75,7 @@ def save_score(score):
 
 
 def game_close():
+    global score
 
     save_score(score)
     topscore = max(load_scores())

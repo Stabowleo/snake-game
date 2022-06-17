@@ -1,4 +1,3 @@
-from turtle import position
 import pygame
 from pygame.locals import *
 from sprites import *
@@ -9,6 +8,7 @@ def main():
     dt = 0
 
     screen = pygame.display.set_mode((480, 480))
+    background = pygame.Surface(pygame.display.get_window_size())
     pygame.display.set_caption("Snake")
     position = (30, 30)
 
@@ -36,10 +36,13 @@ def main():
 
    
         dt = fpsclock.tick(30)
+        snake.clear(screen, background)
         snake.draw(screen)
+        apple.draw(screen)
         snake.update(velocity, dt)
-
+       
         
+
 
 
 if __name__ == "__main__":

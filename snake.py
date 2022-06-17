@@ -29,15 +29,15 @@ class Snake:
 class Food:
 
     def __init__(self) -> None:
-        self.x = round(random.randrange(0, screen.get_width() - snake.size) * 10.0)
-        self.y = round(random.randrange(0, screen.get_height() - snake.size) * 10.0)
+        self.x = round(random.randrange(0, screen.get_width() - Snake().size) * 10.0)
+        self.y = round(random.randrange(0, screen.get_height() - Snake().size) * 10.0)
 
     def draw_food(self):
         pygame.draw.rect(screen, red, [self.x, self.y, 30, 30])
 
     def move(self):
-        self.x = round(random.randrange(0, screen.get_width() - snake.size) * 10.0)
-        self.y = round(random.randrange(0, screen.get_height() - snake.size) * 10.0)
+        self.x = round(random.randrange(0, screen.get_width() - Snake().size) * 10.0)
+        self.y = round(random.randrange(0, screen.get_height() - Snake().size) * 10.0)
 
 
 clock = pygame.time.Clock()
@@ -50,29 +50,13 @@ food = Food()
 
 def main():
     game_over = False
-    game_close = False
 
     while not game_over:
-        
-
-        while not game_close:
-            
-
-            screen.fill((0, 0, 0))
-            pygame.display.update()
-
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == K_q:
-                        game_over = True
-                        game_close = False
-                    if event.key == K_c:
-                        main()
 
 
         for event in pygame.event.get():
             if event.type == QUIT:
-                game_over = True
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == K_w:
                     snake.x_change = 0
@@ -88,11 +72,11 @@ def main():
                     snake.y_change = 0
 
         if snake.x >= screen.get_width() or snake.x < 0 or snake.y >= screen.get_height() or snake.y < 0:
-            game_over = True
+            pass
 
         snake.x += snake.x_change
         snake.y += snake.y_change
-        screen.fill((0, 0, 0))
+        
         food.draw_food()
         snake.head = [snake.x, snake.y]
         
@@ -102,7 +86,7 @@ def main():
 
         for x in snake.snake_list:
             if x == snake.head:
-                game_over = True
+                pass
 
         
         snake.draw_snake()
@@ -115,7 +99,8 @@ def main():
 
         clock.tick(snake.speed)
 
-    pygame.quit()
+
+
 
 if __name__ == "__main__":
     main()
